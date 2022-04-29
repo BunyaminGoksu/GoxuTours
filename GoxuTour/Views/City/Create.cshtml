@@ -1,0 +1,19 @@
+﻿@using GoxuTour.Application
+
+@if (ViewBag.CommandResult != null)
+{
+    var result = (CommandResult)ViewBag.CommandResult;  
+
+    
+        <div class="alert @(result.IsSucceeded ? "alert-success": "alert-danger")">@result.Messages.First()</div>
+    
+}
+<div class="row">
+    <div class="col-12 col-md-8">
+        <form method="post">
+            <label class="form-label" for="Name">City Name</label>
+            <input type="text" name="Name" class="form-control"/>
+            <button class="btn btn-success mt-3" type="submit">Save</button>
+        </form>
+    </div>
+</div>

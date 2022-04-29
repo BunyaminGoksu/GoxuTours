@@ -1,0 +1,31 @@
+﻿@using GoxuTour.Application.Buses
+@model BusDTO
+
+<div class="row">
+    <div class="col-sm-8">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Bus Model Name</th>
+                    <th>Registration Plate</th>
+                    <th>Year</th>
+                    <th>SeatMapping</th>
+                    <th>DistanceTraveled</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>@Model.Id</td>
+                    <td>@Model.BusModelId</td>
+                    <td>@Model.RegistrationPlate</td>
+                    <td>@Model.Year</td>
+                    <td>@Model.SeatMapping</td>
+                    <td>@Model.DistanceTraveled</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+</div>

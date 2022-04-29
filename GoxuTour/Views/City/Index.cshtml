@@ -1,0 +1,119 @@
+﻿@using GoxuTour.Application
+@using GoxuTour.Application.Cities
+@using Newtonsoft.Json
+
+@model IEnumerable<CityDTO>
+
+	@if (TempData["CommandResult"] != null)
+{
+	var resultJson = (string)TempData["CommandResult"];
+	var result = JsonConvert.DeserializeObject<CommandResult>(resultJson);
+
+	<div class="row">
+		<div class="col-12 col-md-8">
+			<div class="alert @(result.IsSucceeded ? "alert-success":"alert-danger")">
+				@(result.Messages.Any() ? result.Messages.First():"Hata")
+			</div>
+		</div>
+	</div>
+
+}
+
+@if (TempData["result"] != null)
+{
+	//TempData üzerin taşınan bir anahtar kelime karşılığındaki verinin ömrü,o anahtar kelimedeki veri okunana kadardır
+	//Eğer veri hiç okunmazsa TempData üzerindeki değerler muhafaza edilir.
+	//Veri en az bir kez okunduğunda o anahar kelime ve değeri TemData'dan silinmek üzere işaretlenir ve Response tamamlandıktan sonra anahtar ve değer silinir
+
+
+
+
+
+	<div class="alert alert-success">
+		@* HTML içerisine Razor expression yazarak TempData verisini görüntülemek de TempData verisinin okunması anlamına gelir*@
+		@*@TempData["result"]*@
+
+		@*		@TempData.Peek("result")
+		*@		@*
+
+			Peek(key) => Veriyi okuduktan sonra silinmek üzere işaretlenmesini istemiyorsan bu metot aracılığı ile okuyabilirsin
+			Keep(key) => Ver2istiyorsanız bu metodu çağırabilirsiniz
+		*@
+		@{
+			TempData.Keep("result");
+		}
+	</div>
+
+
+
+}
+<div class="row">
+	<div class="col-12 col-md-8">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Name</th>
+					<th></th>
+					<th><a class="btn btn-success" asp-action="Create">New City</a></th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var city in Model)
+				{
+					<tr>
+						<td>@city.Id</td>
+						<td>@city.Name</td>
+						<td class="stations-cell">
+						</td>
+						<td>
+							<a class="btn btn-info get-stations-button" href="#" data-city-id="@city.Id">İstasyonları getir</a>
+							<a class="btn btn-primary" asp-route-id=@city.Id asp-action="Update">Update</a>
+							<a class="btn btn-danger" asp-route-id=@city.Id asp-action="Delete">Delete</a>
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+
+</div>
+
+@section Scripts{
+
+<script>
+
+	//$('.get-stations-button').on('click',function(){});
+
+
+	$('.get-stations-button').click(function() {
+
+
+		var tableRow = this.parentElement.parentElement.parentElement;
+		var cityId = this.dataset.cityId;
+
+	$.ajax({
+		type : 'get',
+		url : '/Station/GetByCityId?'+ cityId,
+		success : function (response){
+
+			let text = '';
+			for(var i=0;i<response.length;i++){
+				let station = response[i];
+				text += station.stationName;
+				text += '<br />';
+			}
+			$(tableRow).find('.stations-cell').html(text);
+
+
+		}
+	});
+	
+	});
+
+
+
+
+</script>
+
+}

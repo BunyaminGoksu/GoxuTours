@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GoxuTour.Application\GoxuTour.Application.csproj" />
+    <ProjectReference Include="..\GoxuTour.Presentation\GoxuTour.Persistence.csproj" />
+  </ItemGroup>
+
+</Project>

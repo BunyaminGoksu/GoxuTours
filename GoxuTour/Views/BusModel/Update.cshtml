@@ -1,0 +1,16 @@
+﻿@using GoxuTour.Application.BusModels
+
+@model BusModelDTO
+<div class="row">
+    <div class="col-12 col-md-8">
+        <form method="post">
+                <label class="form-label" for="Name">Bus Model Name</label>
+                <input type="text" name="Name" class="form-control mb-3" value="@Model.Name"/>
+            
+
+
+
+            <button class="btn btn-success mt-3" type="submit">Save</button>
+        </form>
+    </div>
+</div>

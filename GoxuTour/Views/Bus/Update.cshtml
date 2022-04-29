@@ -1,0 +1,20 @@
+﻿@using GoxuTour.Application.Buses
+@model BusDTO
+
+<div class="row">
+    <div class="col-12 col-md-8">
+        <form method="post">
+                         
+             <label class="form-label" for ="SeatMapping" >Seat Mapping</label>
+            <select asp-for="SeatMapping"  asp-items="Html.GetEnumSelectList<SeatingType>()" class="form-control" > </select>
+                
+           
+            <label class="form-label" for ="DistanceTraveled" >Distance Traveled</label>
+             <input type="number" name="DistanceTraveled" class="form-control" for="DistanceTraveled"  value="@Model.DistanceTraveled"/>
+
+
+
+            <button class="btn btn-success mt-3" type="submit">Save</button>
+        </form>
+    </div>
+</div>

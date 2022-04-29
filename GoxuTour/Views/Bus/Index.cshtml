@@ -1,0 +1,53 @@
+﻿@using GoxuTour.Application.Buses
+@*
+	For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model IEnumerable<BusDTO>
+
+<div class="row">
+	<div class="col-12 col-md-8">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Bus Model Name</th>
+					<th>Registration Plate</th>
+					<th>Year</th>
+					<th>Seat Mapping</th>
+					<th>Seat Count</th>
+					<th>Distance Traveled</th>
+					<th><a class="btn btn-success" asp-action="Create">New Bus</a></th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var bus in Model)
+				{
+					<tr>
+						<td>@bus.Id</td>
+						<td>
+							@foreach (var buses in ViewBag.BusModelsList)
+						   {
+							   if(buses.Id == bus.BusModelId){
+
+								   @buses.Name;
+							   }
+						   }
+						</td>
+						<td>@bus.RegistrationPlate</td>
+						<td>@bus.Year</td>
+						<td>@bus.SeatMapping</td>
+						<td>@bus.SeatCount</td>
+						<td>@bus.DistanceTraveled</td>
+						<td>
+							<a class="btn btn-primary" asp-route-id=@bus.Id asp-action="Update">Update</a>
+							<a class="btn btn-danger" asp-route-id=@bus.Id asp-action="Delete">Delete</a>
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+
+</div>

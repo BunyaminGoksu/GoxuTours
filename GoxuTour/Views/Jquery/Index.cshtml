@@ -1,0 +1,148 @@
+﻿
+<div class="row">
+	<div class="col-12 col-md-8">
+		<table id="data_table">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Name</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>1</td>
+					<td>Tsubasa</td>
+					<td>
+						<a href="#">Edit</a>
+					</td>
+				</tr>
+				<tr>
+					<td>2</td>
+					<td>Misaki</td>
+					<td>
+						<a href="#">Edit</a>
+					</td>
+				</tr>
+
+			</tbody>
+		</table>
+	</div>
+</div>
+
+@section Scripts{
+	<script>
+		let tableByDom = document.getElementById('data_table');
+
+		var tableByJq = $('#data_table');
+		
+
+		//Change style/css
+
+		tableByDom.style.border = '1px solid gray';
+
+		tableByJq.css('border','1px solid gray');
+
+		//Read Style
+
+		let currentBorder01= tableByDom.style.border;
+
+		let currentBorderJq =tableByJq.css('border');
+
+		//Change Attribute
+
+		tableByDom.id='my_table';
+		tableByJq.attr('id','my_table');
+
+
+		//Read Attribute
+
+		let id = tableByDom.id;
+
+		let idJq = tableByJq.attr('id');
+
+
+		//ChangeClass
+
+		tableByDom.classList.add('table');
+		tableByDom.classList.add('table-bordered');
+		tableByDom.className = 'table table-bordered';
+
+
+		tableByJq.addClass('table');
+		tableByJq.addClass('table-bordered');
+		tableByJq.attr('class','table table-bordered');
+		
+		//Tablonun bütün satırlarının arkaplan rengini değiştirme
+
+		let tableRows = document.getElementsByTagName('tr');
+		for(var i =0;i<tableRows.length;i++){
+			tableRows[i].style.backgroundColor = 'yellow';
+		}
+
+
+		let tableRowsJq =$('tr');
+		tableRowsJq.css('background-color','yellow');
+		
+
+		$('tr').css('background-color','yellow');
+
+		var firstRowDom = tableRowsJq[2];
+		firstRowDom.style.backgroundColor = 'orange';
+
+		let tsubasaElement = $('.tsubasa');
+		tsubasaElement.css('font-size','10px');
+
+		//Dynamic HTML
+
+		let newRow = document.createElement('tr');
+		let newCol01 = document.createElement('td');
+		let newCol02 = document.createElement('td');
+		let newCol03 = document.createElement('td');
+
+		newCol01.textContent="3";
+		newCol02.textContent="Hyuga";
+
+		newRow.appendChild(newCol01);
+		newRow.appendChild(newCol02);
+		newRow.appendChild(newCol03);
+
+		document.querySelector('tbody').appendChild(newRow);
+
+
+
+
+		let newRowJq = $('<tr>');
+
+		let newCol01Jq = $('<td>').text('4');
+		let newCol02Jq = $('<td>').text('Wakabayashi');
+		let newCol03Jq = $('<td><a href="#">Edit</a></td>');
+		
+		//var col = $('<td>').append(
+		//	$('<a>').attr('href','#').text('Edit')
+		//);
+
+
+		newRowJq
+		.append(newCol01Jq)
+		.append(newCol02Jq)
+		.append(newCol03Jq)
+		.appendTo('tbody');
+
+		$('tbody').append(newRowJq);
+
+
+
+
+		
+
+
+
+
+
+
+
+
+
+	</script>
+}

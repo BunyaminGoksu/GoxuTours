@@ -1,0 +1,38 @@
+﻿@using GoxuTour.Application.BusModels
+
+@model BusModelDTO
+<div class="row">
+    <div class="col-12 col-md-8">
+        <form method="post">
+                <label class="form-label" for="Name">Bus Model Name</label>
+                <input type="text" name="Name" class="form-control mb-3" />
+            <label class="form-label" for="CityId">Bus Manufacturer Naame</label>
+            @*<input type="number" name="CityId" class="form-control mb-3"/>*@
+
+            @if (ViewBag.BusManuList != null)
+            {
+                <select  class="form-control" name="BusManufacturerId">
+                    @*
+                Manuel olarak aşağıdaki gibi yapabiliriz..
+                    *@
+                    @foreach (var city in ViewBag.busManuList)
+                {
+                    <option value="@city.Id">@city.Name</option>
+                }
+                </select>
+            }
+            <label class="form-label" for ="Type" >Type</label>
+            <select asp-for="Type" asp-items="Html.GetEnumSelectList<Bustype>()" class="form-control" > </select>
+
+             <label class="form-label" for="Name">Seat Capacitiy</label>
+             <input type="number" name="SeatCapacity" class="form-control mb-3" />
+
+            <label class="form-label" for ="HasToilet" >HasToilet</label>
+             <input type="checkbox" name="HasToilet" class="form-control" for="HasToilet" />
+
+
+
+            <button class="btn btn-success mt-3" type="submit">Save</button>
+        </form>
+    </div>
+</div>

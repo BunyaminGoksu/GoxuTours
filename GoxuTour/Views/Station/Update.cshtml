@@ -1,0 +1,37 @@
+﻿@using GoxuTour.Application
+@using GoxuTour.Application.Stations
+@model StationDTO
+
+@if(ViewBag.CommandMessage!=null){
+    var result = (CommandResult)ViewBag.CommandMessage;
+
+    foreach (var item in result.Messages)
+    {
+        <div class="alert @(result.IsSucceeded ? "alert-success" : "alert-danger")">@item</div>
+    }
+}
+<div class="row">
+    <div class="col-12 col-md-8">
+        <form  asp-action="update" method="post" asp-controller="Station">
+            <label class="form-label" for="Name">Station Name</label>
+            <input type="text" name="Name" class="form-control mb-3" value="@Model.Name" />
+            <label class="form-label" for="CityName">City Name</label>
+            @*<input type="number" name="cityıd" class="form-control mb-3" value=@model.cityıd />*@
+
+            @if (ViewBag.CityList != null)
+            {
+                <select asp-for="CityId" asp-items="ViewBag.CityList" class="form-control" name="CityId">
+                    @*
+                    Manuel olarak aşağıdaki gibi yapabiliriz..    
+                    *@
+                    @*@foreach (var city in ViewBag.CityList)
+                    {
+                        <option value="@city.Id">@city.Name</option>
+                    }*@
+                </select>
+            }
+            <br />
+            <button class="btn btn-success" type="submit">Update</button>
+        </form>
+    </div>
+</div>

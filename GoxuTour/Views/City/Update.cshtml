@@ -1,0 +1,24 @@
+﻿@using GoxuTour.Application
+@using GoxuTour.Application.Cities
+
+@model CityDTO
+
+@if(ViewBag.CommandMessage != null)
+{
+    var result = (CommandResult)ViewBag.CommandMessage;
+
+
+    @foreach(var item in result.Messages)
+    {
+        <div class="alert @(result.IsSucceeded ? "alert-success" : "alert-danger")">@item</div>
+    }
+} 
+<div class="row">
+    <div class="col-12 col-md-8">
+        <form method="post">
+            <label class="form-label" for="Name">City Name</label>
+            <input type="text" name="Name" class="form-control" value=@Model.Name />
+            <button class="btn btn-success mt-3" type="submit">Update</button>
+        </form>
+    </div>
+</div>

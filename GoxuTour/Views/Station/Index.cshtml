@@ -1,0 +1,63 @@
+﻿@using GoxuTour.Application
+@using GoxuTour.Application.Cities
+@using GoxuTour.Application.Stations
+@using Newtonsoft.Json
+@model IEnumerable<StationDTO>
+
+    @if (TempData["CommandResult"] != null)
+{
+	var jsonResult = (string)TempData["CommandResult"];
+	var result = JsonConvert.DeserializeObject<CommandResult>(jsonResult);
+
+
+	<div class="row">
+		<div class="col-12 col-md-8">
+			<div class="alert @(result.IsSucceeded ? "alert-success":"alert-danger")">
+				@(result.Messages.Any() ? result.Messages.First():"Hata")
+			</div>
+		</div>
+	</div>
+
+
+}
+
+<div class="row">
+	<div class="col-12 col-md-8">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Name</th>
+					<th>City Name</th>
+					<th>
+						<a class="btn btn-success" asp-action="Create">New Station</a>
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var station in Model)
+				{
+					<tr>
+						<td>@station.Id</td>
+						<td>@station.Name</td>
+						<td>
+							@foreach (var city in ViewBag.CityList)
+							{
+								if (city.Id == station.CityId)
+								{
+									@city.Name
+									;
+								}
+							}
+							@*@((ViewBag.CityList as IEnumerable<CityDTO>).SingleOrDefault(c => c.Id == station.CityId).Name) *@
+						</td>
+						<td>
+							<a class="btn btn-primary" asp-route-id=@station.Id asp-action="Update">Update</a>
+							<a class="btn btn-danger" asp-route-id=@station.Id asp-action="Delete">Delete</a>
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+</div> 

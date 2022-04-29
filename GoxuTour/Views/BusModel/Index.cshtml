@@ -1,0 +1,46 @@
+﻿@using GoxuTour.Application.BusModels
+
+@model IEnumerable<BusModelDTO>
+
+<div class="row">
+	<div class="col-12 col-md-8">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Name</th>
+					<th>Bus Manufacturer</th>
+					<th>Type</th>
+					<th>Seat Capacity</th>
+					<th>Has Toilet</th>
+					<th><a class="btn btn-success" asp-action="Create">New Bus Model</a></th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var bus in Model)
+				{
+					<tr>
+						<td>@bus.Id</td>
+						<td>@bus.Name</td>
+						<td>
+							@foreach(var item in ViewBag.BusManuList){
+								if(item.Id== bus.BusManufacturerId)
+								{
+									@item.Name;
+								}
+							}
+						</td>
+						<td>@bus.Type</td>
+						<td>@bus.SeatCapacity</td>
+						<td>@bus.HasToilet</td>
+						<td>
+							<a class="btn btn-primary" asp-route-id=@bus.Id asp-action="Update">Update</a>
+							<a class="btn btn-danger" asp-route-id=@bus.Id asp-action="Delete">Delete</a>
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+
+</div>
